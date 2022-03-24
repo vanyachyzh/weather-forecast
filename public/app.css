@@ -1,0 +1,230 @@
+body{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+/* Root */
+
+#root{
+    height: 600px;
+    width: 1000px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 1px solid black;
+}
+
+/* Header */
+
+.header{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100px;
+    width: 1000px;
+}
+.header h1{
+    width: 150px;
+}
+.header .login{
+    width: 150px;
+    text-align: end;
+}
+
+/* Greetings */
+
+.greetings{
+    background-color: aqua;
+    margin-top: 100px;
+    height: 450px;
+    width: 1000px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Registration */
+
+.registration{
+    background-color: red;
+    margin-top: 100px;
+    height: 450px;
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.registration__email{
+    width: 150px;
+}
+.registration__password{
+    width: 150px;
+}
+.registration__button{
+    width: 150px;
+}
+
+/* Log In */
+
+.logIn{
+    background-color: yellow;
+    margin-top: 100px;
+    height: 450px;
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.logIn__email{
+    width: 150px;
+}
+.logIn__password{
+    width: 150px;
+}
+.logIn__button{
+    width: 150px;
+}
+
+/* Favorites */
+
+.favorites{
+    background-color: greenyellow;
+    margin-top: 100px;
+    height: 450px;
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* History */
+
+.history{
+    background-color: blueviolet;
+    margin-top: 100px;
+    height: 450px;
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Result */
+
+.result{
+    margin-top: 100px;
+    height: 450px;
+    width: 1000px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: orange;
+}
+
+.mainInfo{
+    background-color: aquamarine;
+    width: 250px;
+    height: 400px;
+}
+
+.mainInfo__cityName{
+    text-align: center;
+    font-size: 50px;
+    margin-top: 100px;
+}
+.mainInfo__nowIcon{
+    width: 50px;
+    height: 50px; 
+    margin-left: 100px;  
+}
+.mainInfo__nowTemp{
+    font-size: 50px;  
+    text-align: center;
+}
+
+.additionalInfo{
+    width: 600px;
+    height: 400px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.additionalInfo .currentItems{
+    background-color: rgb(0, 255, 85);
+    width: 200px;
+    height: 90px;
+    display: flex;
+    justify-content:  center;
+    align-items: center;
+}
+
+/* Items */
+
+.items{
+    margin-top: 100px;
+    height: 450px;
+    width: 1000px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.item {
+    background-color: aqua;
+    width: 150px;
+    height: 189px;
+    border-radius: 20px;
+    margin: 20px;
+}
+
+.item .nameOfCity{
+    font-size: large;
+    text-align: center;
+    margin-top: 20px;
+    width: 100%;
+    color: red;
+}
+
+.item img{
+    width: 100px;
+    height: 100px;
+    margin-left: 25px;
+}
+
+.item .temp{
+    font-size: larger;
+    text-align: center;
+    color: red;
+}
+
+/* Footer */
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 1000px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
