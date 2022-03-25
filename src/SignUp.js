@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 
-function Registration(props){
+function SignUp(props){
 
     // function handlerOnSubmit(){
     //     console.log()
@@ -13,9 +13,9 @@ function Registration(props){
         <form className="registration" action="#" name="inputCity">
             <input className="registration__email" type="text"></input> <br></br>
             <input className="registration__password" type="text"></input> <br></br>
-            <input className="registration__button" type="submit" onClick={props.pressSignUpButton} value="Sign Up"></input>
+            <input className="registration__button" type="submit" onClick={props.showSignUp} value="Sign Up"></input>
         </form>
     )
 }
 
-export default Registration;
+export default SignUp;

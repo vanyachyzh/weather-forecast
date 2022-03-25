@@ -1,11 +1,15 @@
 import React from "react"
 
-function Favorites(props){
+function Favorites() {
 
-    return(
-        <div className="favorites">
-            Favorites
-        </div>
+    return (
+            <ul className="favorites">
+                {
+                    (localStorage.getItem("list2")).split(",").map((element) => {
+                        return <li key={element.toString()}>{element}</li>
+                    })
+                }
+            </ul>
     )
 }
 

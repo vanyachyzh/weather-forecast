@@ -1,11 +1,14 @@
-import React from "react"
+import React, { useState } from "react"
 
-function History(props){
-
-    return(
-        <div className="history">
-            History
-        </div>
+function History() {
+    return (
+        <ul className="history">
+            {
+                (localStorage.getItem("list")).split(",").map((element) => {
+                    return (<li key={element.toString()}>{element}</li>)
+                })
+            }
+        </ul>
     )
 }
 

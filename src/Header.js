@@ -4,14 +4,23 @@ function Header(props) {
 
   return (
     <div className='header'>
-      <h1>Weather <br></br> Forecast</h1>
+      <h1 onClick={props.showGreetings}>Weather <br></br> Forecast</h1>
+
       <input onKeyPress={props.pressEnter}></input>
-      {props.showProfile
-      ?      <div> <span>History</span>   <span>| Favorites</span> <span>| Log Out</span></div>
-      :      <div> <span className='login' onClick={props.pressSignUp}>Sign Up</span> <span>| Log In</span></div>
 
+      {props.headerStatus==="Sign Up / Log In"
+        ?
+        <div>
+          <span onClick={props.showSignUpForm}>Sign Up</span>
+          <span onClick={props.showLogInForm}>| Log In</span>
+        </div>
+        :
+        <div>
+          <span onClick={props.showHistory}>History</span>
+          <span onClick={props.showFavorites}>| Favorites</span>
+          <span onClick={props.headerSwitch} >| Log Out</span>
+        </div>
       }
-
     </div>
   )
 }

@@ -14,7 +14,7 @@ function LogIn(props){
         <form className="logIn" action="#" name="inputCity">
             <input className="logIn__email" type="text"></input> <br></br>
             <input className="logIn__password" type="text"></input> <br></br>
-            <input className="logIn__button" type="submit" onClick={props.pressSignUp2} value="Log In"></input>
+            <input className="logIn__button" type="submit" onClick={()=>{props.headerSwitch(); props.showGreetings()}} value="Log In"></input>
         </form>
     )
 }

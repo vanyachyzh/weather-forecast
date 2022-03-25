@@ -98,15 +98,27 @@ body{
 /* Favorites */
 
 .favorites{
-    background-color: greenyellow;
+    background-color: rgb(226, 192, 43);
     margin-top: 100px;
     height: 450px;
     width: 1000px;
+    padding-left: 0;
+    list-style: none;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.favorites li{
+    background-color: red;
+    width: 200px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    text-transform:capitalize;
 }
 
 /* History */
@@ -116,11 +128,22 @@ body{
     margin-top: 100px;
     height: 450px;
     width: 1000px;
+    padding-left: 0;
+    list-style: none;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
+    flex-direction: column;
+}
+.history li{
+    background-color: red;
+    width: 200px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    text-transform:capitalize;
 }
 
 /* Result */
