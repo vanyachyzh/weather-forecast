@@ -4,7 +4,7 @@ function Greetings(props){
 
     return(
         <div className="greetings">
-            Hello! I am going to work for you!
+            To use favorites or history sign up or log in to your account!
         </div>
     )
 }

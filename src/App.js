@@ -7,6 +7,7 @@ import Greetings from './Greetings';
 import Favorites from './Favorites';
 import History from './History';
 import SignUp from './SignUp';
+import {connect} from "react-redux"
 
 
 
@@ -15,12 +16,13 @@ let list = []
 let list2 = []
 
 
-function App() {
-  let [urlName, setUrlName] = useState("Odesa")
+function App(props) {
+  let [urlName, setUrlName] = useState("")
   let [url, setUrl] = useState('')
   let [cityName, setCityName] = useState("")
   let [nowIcon, setNowIcon] = useState("")
   let [nowTemp, setNowTemp] = useState("")
+  let [nowDescription, setNowDescription] = useState("")
   let [todayTemp, setTodayTemp] = useState("")
   let [tomorrowTemp, setTomorrowTemp] = useState("")
   let [afterTomorrowTemp, setAfterTomorrowTemp] = useState("")
@@ -31,7 +33,7 @@ function App() {
   let [pressure, setPressure] = useState("")
   let [visibility, setVisibility] = useState("")
 
-  let [contentStatus, setContentStatus] = useState("Result")
+  let [contentStatus, setContentStatus] = useState("Greetings")
   let [headerStatus, setHeaderStatus] = useState("Sign Up / Log In")
 
   useEffect(() => {
@@ -42,6 +44,7 @@ function App() {
         setCityName(r.city.name)
         setNowIcon('http://openweathermap.org/img/wn/' + r.list[0].weather[0].icon + '.png')
         setNowTemp(Math.round(r.list[0].main.temp - 273.15) + "°C")
+        setNowDescription(r.list[0].weather[0].description)
         setTodayTemp(Math.round(r.list[0].main.temp - 273.15) + "°C")
         setTomorrowTemp(Math.round(r.list[8].main.temp - 273.15) + "°C")
         setAfterTomorrowTemp(Math.round(r.list[16].main.temp - 273.15) + "°C")
@@ -60,6 +63,7 @@ function App() {
       setUrlName(document.querySelector("input").value)
       list.push(document.querySelector("input").value)
       localStorage.setItem("list", list)
+      showResult()
     }
   }
   function pressButton(){
@@ -67,9 +71,7 @@ function App() {
     localStorage.setItem("list2", list2)
   }
 
-  function showFavoritesCity(){
-    setUrlName("Kyiv")
-  }
+
 
   const showSignUpForm = () => setContentStatus("Registration")
   const showFavorites = () => setContentStatus("Favorites")
@@ -85,12 +87,15 @@ function App() {
     }
   }
 
+
+
+
   return (
     <div>
 
       <Header pressEnter={pressEnter} showSignUpForm={showSignUpForm} showFavorites={showFavorites} showGreetings={showGreetings} showHistory={showHistory} showLogInForm={showLogInForm} showResult={showResult} contentStatus={contentStatus} headerStatus={headerStatus} headerSwitch={headerSwitch}></Header>
 
-      <div className='footer'>vanyachyzh</div>
+
 
       {contentStatus==="Greetings"
         ? <Greetings></Greetings>
@@ -98,15 +103,39 @@ function App() {
         : contentStatus ==="History" ? <History ></History>
         : contentStatus ==="LogIn" ? <LogIn showGreetings={showGreetings}  headerSwitch={headerSwitch} ></LogIn>
         : contentStatus ==="Registration" ? <SignUp  headerSwitch={headerSwitch}></SignUp>
-        : contentStatus ==="Result" ? <Result pressButton={pressButton} cityName={cityName} nowIcon={nowIcon} nowTemp={nowTemp} todayTemp={todayTemp} tomorrowTemp={tomorrowTemp} afterTomorrowTemp={afterTomorrowTemp} realFeel={realFeel} humidity={humidity} description={description} windSpeed={windSpeed} pressure={pressure} visibility={visibility}></Result>
+        : contentStatus ==="Result" ? <Result pressButton={pressButton} cityName={cityName} nowIcon={nowIcon} nowTemp={nowTemp} nowDescription={nowDescription} todayTemp={todayTemp} tomorrowTemp={tomorrowTemp} afterTomorrowTemp={afterTomorrowTemp} realFeel={realFeel} humidity={humidity} description={description} windSpeed={windSpeed} pressure={pressure} visibility={visibility}></Result>
         : <div> 3</div>
       }
 
-      {/* <History></History> */}
+      {/* {
+        props.item===true
+        ? <div  className='footer'>vanyachyzh</div>
+        : null
+      } */}
     </div>
   )
 }
 
-export default App;
+function mapStateToProps(state){
+  return{
+    item: state
+  }
+}
+function mapDispatchToProps(dispatch){
+  return{
+    change: ()=>{dispatch({type: "HHH", name: " hello"} )}
+  }
+}
 
+export default connect(mapStateToProps, mapDispatchToProps)(App)
+
+
+
+// let a= 1;
+
+// function hello (b=a){
+//   console.log(b)
+// }
+
+// hello(2)
 

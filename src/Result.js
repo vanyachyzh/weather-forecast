@@ -9,8 +9,9 @@ function City(props) {
       <div className='mainInfo'>
         <div className='mainInfo__cityName'>{props.cityName}</div>
         <img className='mainInfo__nowIcon' src={props.nowIcon}></img>
+        <div className='mainInfo__nowDescription'>{props.nowDescription}</div>
         <div className='mainInfo__nowTemp'>{props.nowTemp}</div>
-        <button onClick={props.pressButton} >Add to favorites</button>
+        <button className='mainInfo__addToFavorites' onClick={props.pressButton} >Add to favorites</button>
       </div>
 
       <div className='additionalInfo'>

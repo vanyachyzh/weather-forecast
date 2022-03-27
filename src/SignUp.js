@@ -10,10 +10,10 @@ function SignUp(props){
     // }
 
     return(
-        <form className="registration" action="#" name="inputCity">
-            <input className="registration__email" type="text"></input> <br></br>
-            <input className="registration__password" type="text"></input> <br></br>
-            <input className="registration__button" type="submit" onClick={props.showSignUp} value="Sign Up"></input>
+        <form className="signUp" action="#" name="inputCity">
+            <input placeholder='email' className="signUp__email" type="text"></input> <br></br>
+            <input placeholder='password' className="signUp__password" type="text"></input> <br></br>
+            <input className="signUp__button" type="submit" onClick={props.showSignUp} value="Sign Up"></input>
         </form>
     )
 }
