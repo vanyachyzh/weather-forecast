@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import Header from "./Header"
-import Result from "./Result"
-import Registration from "./SignUp"
+import Header from "./Header";
+import Result from "./Result";
 import LogIn from './LogIn';
 import Greetings from './Greetings';
 import Favorites from './Favorites';
 import History from './History';
 import SignUp from './SignUp';
-import {connect} from "react-redux"
+import Footer from './Footer';
+import { connect } from "react-redux";
+import { clickButtonCreator, pressEnterCreator } from './redux/actions';
 
 
 
-
-let list = []
-let list2 = []
-
-
+let historyList = [];
+let favoritesList = []
 function App(props) {
-  let [urlName, setUrlName] = useState("")
+  let [urlCityName, setUrlName] = useState("odesa")
   let [url, setUrl] = useState('')
   let [cityName, setCityName] = useState("")
   let [nowIcon, setNowIcon] = useState("")
@@ -32,12 +30,10 @@ function App(props) {
   let [windSpeed, setWindSpeed] = useState("")
   let [pressure, setPressure] = useState("")
   let [visibility, setVisibility] = useState("")
-
-  let [contentStatus, setContentStatus] = useState("Greetings")
-  let [headerStatus, setHeaderStatus] = useState("Sign Up / Log In")
+  let [thirdDay, setThirdDay] = useState("")
 
   useEffect(() => {
-    setUrl('https://api.openweathermap.org/data/2.5/forecast?q=' + urlName + '&cnt=40&appid=2c4c38e0912721c6068d66d264ce8acb')
+    setUrl('https://api.openweathermap.org/data/2.5/forecast?q=' + urlCityName + '&cnt=40&appid=2c4c38e0912721c6068d66d264ce8acb')
     fetch(url)
       .then(r => r.json())
       .then(r => {
@@ -46,96 +42,117 @@ function App(props) {
         setNowTemp(Math.round(r.list[0].main.temp - 273.15) + "°C")
         setNowDescription(r.list[0].weather[0].description)
         setTodayTemp(Math.round(r.list[0].main.temp - 273.15) + "°C")
-        setTomorrowTemp(Math.round(r.list[8].main.temp - 273.15) + "°C")
-        setAfterTomorrowTemp(Math.round(r.list[16].main.temp - 273.15) + "°C")
+        setTomorrowTemp(Math.round(r.list[9].main.temp - 273.15) + "°C")
+        setAfterTomorrowTemp(Math.round(r.list[18].main.temp - 273.15) + "°C")
         setRealFeel(Math.round(r.list[0].main.feels_like - 273.15) + "°C")
         setHumidity(r.list[0].main.humidity + "%")
         setDescription(r.list[0].weather[0].description)
         setWindSpeed(r.list[0].wind.speed + "m/s")
         setPressure(r.list[0].main.pressure + 'mbar')
         setVisibility(r.list[0].visibility)
+        setThirdDay(new Date(r.list[18].dt*1000).toLocaleString('ua-Ua', {day:'numeric', month:'numeric'}))
       })
   })
 
   function pressEnter(event) {
-
     if (event.key === 'Enter') {
       setUrlName(document.querySelector("input").value)
-      list.push(document.querySelector("input").value)
-      localStorage.setItem("list", list)
-      showResult()
+      historyList.push(document.querySelector("input").value)
+      localStorage.setItem("historyList", historyList)
+      props.onKeyEnter()
     }
   }
-  function pressButton(){
-    list2.push(cityName)
-    localStorage.setItem("list2", list2)
+  function pressCityButton(e) {
+    console.log(e.target.textContent)
+    setUrlName(e.target.textContent)
+    props.onButton()
   }
 
-
-
-  const showSignUpForm = () => setContentStatus("Registration")
-  const showFavorites = () => setContentStatus("Favorites")
-  const showHistory = () => setContentStatus("History")
-  const showLogInForm = () => setContentStatus("LogIn")
-  const showResult = () => setContentStatus("Result")
-  const showGreetings = () => setContentStatus("Greetings")
-  const headerSwitch = () => {
-    if(headerStatus==="Sign Up / Log In"){
-      setHeaderStatus("Using")
-    }else{
-      setHeaderStatus("Sign Up / Log In")
-    }
+  function pressButton() {
+    favoritesList.push(cityName)
+    localStorage.setItem("favoritesList", favoritesList)
   }
-
-
-
 
   return (
     <div>
+      <Header pressEnter={pressEnter}></Header>
+      <Footer></Footer>
 
-      <Header pressEnter={pressEnter} showSignUpForm={showSignUpForm} showFavorites={showFavorites} showGreetings={showGreetings} showHistory={showHistory} showLogInForm={showLogInForm} showResult={showResult} contentStatus={contentStatus} headerStatus={headerStatus} headerSwitch={headerSwitch}></Header>
-
-
-
-      {contentStatus==="Greetings"
-        ? <Greetings></Greetings>
-        : contentStatus ==="Favorites" ? <Favorites ></Favorites>
-        : contentStatus ==="History" ? <History ></History>
-        : contentStatus ==="LogIn" ? <LogIn showGreetings={showGreetings}  headerSwitch={headerSwitch} ></LogIn>
-        : contentStatus ==="Registration" ? <SignUp  headerSwitch={headerSwitch}></SignUp>
-        : contentStatus ==="Result" ? <Result pressButton={pressButton} cityName={cityName} nowIcon={nowIcon} nowTemp={nowTemp} nowDescription={nowDescription} todayTemp={todayTemp} tomorrowTemp={tomorrowTemp} afterTomorrowTemp={afterTomorrowTemp} realFeel={realFeel} humidity={humidity} description={description} windSpeed={windSpeed} pressure={pressure} visibility={visibility}></Result>
-        : <div> 3</div>
-      }
-
-      {/* {
-        props.item===true
-        ? <div  className='footer'>vanyachyzh</div>
+      {props.SignUp
+        ? <SignUp></SignUp>
         : null
-      } */}
+      }
+      {props.LogIn
+        ? <LogIn></LogIn>
+        : null
+      }
+      {props.Greetings
+        ? <Greetings></Greetings>
+        : null
+      }
+      {props.Result
+        ? <Result cityName={cityName} nowIcon={nowIcon} nowTemp={nowTemp} nowDescription={nowDescription} todayTemp={todayTemp} tomorrowTemp={tomorrowTemp} afterTomorrowTemp={afterTomorrowTemp} realFeel={realFeel} humidity={humidity} description={description} windSpeed={windSpeed} pressure={pressure} visibility={visibility} thirdDay={thirdDay} pressButton={pressButton}></Result>
+        : null
+      }
+      {props.Favorites
+        ? <Favorites pressCityButton={pressCityButton}></Favorites>
+        : null
+      }
+      {props.History
+        ? <History pressCityButton={pressCityButton}></History>
+        : null
+      }
     </div>
   )
 }
 
-function mapStateToProps(state){
-  return{
-    item: state
+const mapStateToProps = (state) => {
+  const { mainContentReducer } = state
+  return {
+    SignUp: mainContentReducer.SignUp,
+    LogIn: mainContentReducer.LogIn,
+    Greetings: mainContentReducer.Greetings,
+    Result: mainContentReducer.Result,
+    Favorites: mainContentReducer.Favorites,
+    History: mainContentReducer.History
   }
 }
-function mapDispatchToProps(dispatch){
-  return{
-    change: ()=>{dispatch({type: "HHH", name: " hello"} )}
+function mapDispatchToProps(dispatch) {
+  return {
+    onButton: () => { dispatch(clickButtonCreator()) },
+    onKeyEnter: () => { dispatch(pressEnterCreator()) }
   }
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(App)
 
 
 
-// let a= 1;
 
-// function hello (b=a){
-//   console.log(b)
-// }
 
-// hello(2)
+
+
+
+  // function pressButton(){
+  //   list2.push(cityName)
+  //   localStorage.setItem("list2", list2)
+  // }
+
+
+
+  // const showSignUpForm = () => setContentStatus("Registration")
+  // const showFavorites = () => setContentStatus("Favorites")
+  // const showHistory = () => setContentStatus("History")
+  // const showLogInForm = () => setContentStatus("LogIn")
+  // const showResult = () => setContentStatus("Result")
+  // const showGreetings = () => setContentStatus("Greetings")
+  // const headerSwitch = () => {
+  //   if(headerStatus==="Sign Up / Log In"){
+  //     setHeaderStatus("Using")
+  //   }else{
+  //     setHeaderStatus("Sign Up / Log In")
+  //   }
+  // }
+
+
+
 

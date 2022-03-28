@@ -1,13 +1,14 @@
-import React from "react"
+import React from "react";
 
-function Favorites() {
+function Favorites(props) {
 
-    return (
+    return ( 
             <ul className="favorites">
-                {
-                    (localStorage.getItem("list2")).split(",").map((element) => {
-                        return <li key={element.toString()}>{element}</li>
+                {(localStorage.getItem("favoritesList"))!==null
+                    ?(localStorage.getItem("favoritesList")).split(",").map((element) => {
+                        return <li key={element.toString()} onClick={props.pressCityButton}>{element}</li>
                     })
+                    : <div>Your list is empty</div>
                 }
             </ul>
     )

@@ -1,42 +1,42 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import {clickLogInButtonCreator}  from './redux/actions';
 
-function LogIn(props){
+function LogIn(props) {
 
 
-    function handlerOnSubmit(){
-        console.log(document.querySelector(".logIn__password").value)
 
+
+  function check(){
+    let emailStorage = localStorage.getItem("email")
+    let passwordStorage = localStorage.getItem("password")
+    let email = document.querySelector(".logIn__email").value
+    let password = document.querySelector(".logIn__password").value
+    if(emailStorage===email && passwordStorage===password){
+      props.onLogInButton()
+    }else{
+      console.log("wrong password or email")
     }
-
-    return(
-        // <form className="logIn" action="#" name="inputCity">
-        //     <input placeholder='email' className="logIn__email" type="text"></input> <br></br>
-        //     <input placeholder='password' className="logIn__password" type="text"></input> <br></br>
-        //     <input className="logIn__button" type="submit" onClick={()=>{props.headerSwitch(); props.showGreetings()}} value="Log In"></input>
-        // </form>
-            <form className="logIn" action="#" name="inputCity">
-                        <div>{props.item}</div>
-                <input placeholder='email' className="logIn__email" type="text"></input> <br></br>
-                <input placeholder='password' className="logIn__password" type="text"></input> <br></br>
-                <input onClick={props.checkPassword} className="logIn__button" type="submit" value="Log In"></input>
-            </form>
-
-
-
-    )
+  }
+  return (
+    <form className="logIn" action="#" name="inputCity">
+      <input placeholder='email' className="logIn__email" type="text"></input> <br></br>
+      <input placeholder='password' className="logIn__password" type="text"></input> <br></br>
+      <input onClick={check} className="logIn__button" type="submit" value="Log In"></input>
+    </form>
+  )
 }
 
-function mapStateToProps(state){
-    let { reducer } = state
-    return{
-      item: reducer[0].one
-    }
+const mapStateToProps = (state) => {
+  const { mainContentReducer } = state
+  return {
+      signUp: mainContentReducer.SignUp
   }
-  function mapDispatchToProps(dispatch){
-    return{
-      checkPassword: ()=>{dispatch({type: "CLICK_BUTTON"})}
-    }
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    onLogInButton: () => { dispatch(clickLogInButtonCreator()) }
   }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogIn)
