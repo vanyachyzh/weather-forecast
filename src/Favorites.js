@@ -8,7 +8,7 @@ function Favorites(props) {
                     ?(localStorage.getItem("favoritesList")).split(",").map((element) => {
                         return <li key={element.toString()} onClick={props.pressCityButton}>{element}</li>
                     })
-                    : <div>Your list is empty</div>
+                    : <div className="emptyList">Your favorites list is empty!</div>
                 }
             </ul>
     )

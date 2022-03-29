@@ -5,7 +5,7 @@ import React from 'react';
 
 function Footer(props) {
   return (
-    <div className="footer">vanychyzh</div>
+    <div className="footer"> <a href='https://t.me/vanyachyzh'>      vanyachyzh</a>  </div>
   )
 }
 

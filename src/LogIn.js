@@ -4,9 +4,6 @@ import {clickLogInButtonCreator}  from './redux/actions';
 
 function LogIn(props) {
 
-
-
-
   function check(){
     let emailStorage = localStorage.getItem("email")
     let passwordStorage = localStorage.getItem("password")

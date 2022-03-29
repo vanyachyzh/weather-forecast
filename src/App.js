@@ -43,14 +43,14 @@ function App(props) {
         setNowDescription(r.list[0].weather[0].description)
         setTodayTemp(Math.round(r.list[0].main.temp - 273.15) + "°C")
         setTomorrowTemp(Math.round(r.list[9].main.temp - 273.15) + "°C")
-        setAfterTomorrowTemp(Math.round(r.list[18].main.temp - 273.15) + "°C")
+        setAfterTomorrowTemp(Math.round(r.list[19].main.temp - 273.15) + "°C")
         setRealFeel(Math.round(r.list[0].main.feels_like - 273.15) + "°C")
         setHumidity(r.list[0].main.humidity + "%")
         setDescription(r.list[0].weather[0].description)
-        setWindSpeed(r.list[0].wind.speed + "m/s")
-        setPressure(r.list[0].main.pressure + 'mbar')
+        setWindSpeed(r.list[0].wind.speed + " m/s")
+        setPressure(r.list[0].main.pressure + ' mbar')
         setVisibility(r.list[0].visibility)
-        setThirdDay(new Date(r.list[18].dt*1000).toLocaleString('ua-Ua', {day:'numeric', month:'numeric'}))
+        setThirdDay(new Date(r.list[19].dt*1000).toLocaleString('ua-Ua', {day:'numeric', month:'numeric'}))
       })
   })
 
@@ -76,7 +76,7 @@ function App(props) {
   return (
     <div>
       <Header pressEnter={pressEnter}></Header>
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
 
       {props.SignUp
         ? <SignUp></SignUp>

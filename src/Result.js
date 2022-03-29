@@ -1,8 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { connect } from "react-redux";
+import { clickButtonAddToFavoritesCreator } from './redux/actions';
 
 
 function Result(props) {
-console.log(props)
+
+  function check() {
+    console.log(props.Favorites)
+    let emailStorage = localStorage.getItem("email")
+    let passwordStorage = localStorage.getItem("password")
+    if (emailStorage!==null&& passwordStorage!==null ) {
+      props.pressButton()
+    }else{
+      props.showResult()
+    }
+    
+  }
   return (
     <div className='result'>
 
@@ -11,7 +24,7 @@ console.log(props)
         <img className='mainInfo__nowIcon' src={props.nowIcon}></img>
         <div className='mainInfo__nowDescription'>{props.nowDescription}</div>
         <div className='mainInfo__nowTemp'>{props.nowTemp}</div>
-        <button className='mainInfo__addToFavorites' onClick={props.pressButton}>Add to favorites</button>
+        <button className='mainInfo__addToFavorites' onClick={check}>Add to favorites</button>
       </div>
 
       <div className='additionalInfo'>
@@ -30,4 +43,16 @@ console.log(props)
   )
 }
 
-export default Result;
+const mapStateToProps = (state) => {
+  const { headerReducer } = state
+  return {
+    Favorites: headerReducer.FavoritesButton
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    showResult: ()=>{ dispatch(clickButtonAddToFavoritesCreator())}
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Result)

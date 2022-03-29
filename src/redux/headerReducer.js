@@ -1,4 +1,4 @@
-import { CLICK_SIGN_UP_BUTTON, CLICK_LOG_IN_BUTTON, CLICK_LOG_OUT} from "./types"
+import { CLICK_SIGN_UP_BUTTON, CLICK_LOG_IN_BUTTON, CLICK_LOG_OUT, CLICK_BUTTON_ADD_TO_FAVORITES } from "./types"
 
 const initialState = {
     SignUpButton: true,
@@ -27,6 +27,10 @@ const headerReducer = (state = initialState, action) => {
                 LogOutButton: true
             }
         case CLICK_LOG_OUT:
+            return {
+                ...initialState
+            }
+        case CLICK_BUTTON_ADD_TO_FAVORITES:
             return {
                 ...initialState
             }

@@ -4,7 +4,7 @@ function Greetings(props){
 
     return(
         <div className="greetings">
-            To use favorites or history sign up or log in to your account!
+            To use favorites and history sign up or log in to your account!
         </div>
     )
 }

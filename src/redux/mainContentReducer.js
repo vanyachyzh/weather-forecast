@@ -1,4 +1,4 @@
-import { CLICK_SIGN_UP, CLICK_LOG_IN, CLICK_LOGO, CLICK_LOG_IN_BUTTON, CLICK_SIGN_UP_BUTTON, CLICK_FAVORITES, CLICK_HISTORY, CLICK_BUTTON, PRESS_ENTER } from "./types"
+import { CLICK_SIGN_UP, CLICK_LOG_IN, CLICK_LOGO, CLICK_LOG_IN_BUTTON, CLICK_SIGN_UP_BUTTON, CLICK_FAVORITES, CLICK_HISTORY, CLICK_BUTTON, PRESS_ENTER, CLICK_BUTTON_ADD_TO_FAVORITES } from "./types"
 
 const initialState = {
     SignUp: false,
@@ -26,7 +26,7 @@ const mainContentReducer = (state = initialState, action) => {
         case CLICK_LOGO:
             return {
                 ...initialState,
-                Greetings: true,
+                Result: true,
                 Greetings: false
             }
         case CLICK_SIGN_UP_BUTTON:
@@ -63,6 +63,12 @@ const mainContentReducer = (state = initialState, action) => {
             return {
                 ...initialState,
                 Result: true,
+                Greetings: false
+            }
+        case CLICK_BUTTON_ADD_TO_FAVORITES:
+            return {
+                ...initialState,
+                LogIn: true,
                 Greetings: false
             }
         default:

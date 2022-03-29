@@ -1,4 +1,4 @@
-import { CLICK_SIGN_UP, CLICK_LOG_IN, CLICK_LOGO, CLICK_LOG_IN_BUTTON, CLICK_SIGN_UP_BUTTON, CLICK_LOG_OUT, CLICK_FAVORITES, CLICK_HISTORY, CLICK_BUTTON, PRESS_ENTER} from "./types"
+import { CLICK_SIGN_UP, CLICK_LOG_IN, CLICK_LOGO, CLICK_LOG_IN_BUTTON, CLICK_SIGN_UP_BUTTON, CLICK_LOG_OUT, CLICK_FAVORITES, CLICK_HISTORY, CLICK_BUTTON, PRESS_ENTER, CLICK_BUTTON_ADD_TO_FAVORITES} from "./types"
 
 export const clickSignUpCreator = () =>{
     return {
@@ -52,6 +52,12 @@ export const clickButtonCreator = () =>{
 export const pressEnterCreator = () =>{
     return {
         type: PRESS_ENTER
+    }
+}
+
+export const clickButtonAddToFavoritesCreator = () =>{
+    return {
+        type: CLICK_BUTTON_ADD_TO_FAVORITES
     }
 }
 

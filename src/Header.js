@@ -9,7 +9,7 @@ function Header(props) {
   return (
     <div className='header'>
       <h1 className='header__logo' onClick={props.onLogo} >Weather <br></br> Forecast</h1>
-      <input placeholder='enter city' className='header__input' onKeyPress={props.pressEnter} ></input>
+      <input placeholder='Enter city' className='header__input' onKeyPress={props.pressEnter} ></input>
       {
         props.SignUpButton && props.LogInButton
           ? <div>
