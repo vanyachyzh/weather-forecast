@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 
-function History(props) {
+const History = ({ onCityButtonPress }) => {
+    const historyList = localStorage.getItem("historyList");
+
     return (
         <ul className="history" >
-            {localStorage.getItem("historyList")!==null
-                ?(localStorage.getItem("historyList")).split(",").map((element) => {
-                    return (<li key={element.toString()} onClick={props.pressCityButton}>{element}</li>)
+            {historyList !== null
+                ? localStorage.getItem("historyList").split(",").map((element) => {
+                    return (<li key={Math.random()} onClick={onCityButtonPress}>{element}</li>)
                 })
-                :<div className="emptyList">Your history is empty!</div>
+                : <div className="emptyList">Your history is empty!</div>
             }
         </ul>
     )

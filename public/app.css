@@ -95,6 +95,8 @@ body {
   width: 60px;
   height: 25px;
   border-radius: 5px;
+  user-select: none;
+  cursor: pointer;
 }
 .signUp {
   margin-top: 100px;
@@ -112,6 +114,8 @@ body {
   width: 60px;
   height: 25px;
   border-radius: 5px;
+  user-select: none;
+  cursor: pointer;
 }
 /* Result */
 .result {
@@ -201,6 +205,7 @@ body {
   border-top: 2px solid gray ;
   border-left: 2px solid gray ;
 }
+/* Favorites */
 .favorites {
   margin-top: 100px;
   height: 450px;
@@ -217,6 +222,7 @@ body {
   margin-top: 200px;
 }
 .favorites li {
+  position: relative;
   text-transform: capitalize;
   background-color: #23a6d5;
   width: 100px;
@@ -232,6 +238,11 @@ body {
   border-top: 2px solid gray ;
   border-left: 2px solid gray ;
 }
+.favorites li .deleteButton {
+  position: absolute;
+  right: -20px;
+}
+/* Footer */
 .footer {
   position: absolute;
   bottom: 0;
@@ -240,9 +251,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-top: 2px solid gray ;
 }
 .footer a {
   text-decoration: none;
   color: black;
+  font-weight: 800;
+  color: #f8ec3b1e;
 }

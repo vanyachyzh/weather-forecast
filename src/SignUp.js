@@ -1,38 +1,33 @@
 import React from "react";
-import { connect } from "react-redux"
+import { connect } from "react-redux";
 import { clickSignUpButtonCreator } from './redux/actions';
 
-function SignUp(props) {
-    function signUp(){
-        console.log(document.querySelector(".signUp__email").value)
-        localStorage.setItem("email",document.querySelector(".signUp__email").value);
-        localStorage.setItem("password",document.querySelector(".signUp__password").value )
-        if("email",document.querySelector(".signUp__email").value!=="" &&"password",document.querySelector(".signUp__password").value!==""){
-            props.onLogInButton();
+const SignUp = ({ onLogInButton }) => {
+
+    const checkConditions = () => {
+        let enteredEmail = document.querySelector(".signUp__email").value;
+        let enteredPassword = document.querySelector(".signUp__password").value;
+        localStorage.setItem("email", enteredEmail);
+        localStorage.setItem("password", enteredPassword);
+        if (enteredEmail !== "" && enteredPassword !== "") {
+            onLogInButton();
         }
-        
     }
+
     return (
         <form className="signUp" action="#" name="inputCity">
             <input placeholder='email' className="signUp__email" type="text"></input> <br></br>
             <input placeholder='password' className="signUp__password" type="text"></input> <br></br>
-            <input className="signUp__button" type="submit" value="Sign Up" onClick={signUp}></input>
+            <input className="signUp__button" type="submit" value="Sign Up" onClick={checkConditions}></input>
         </form>
     )
 }
 
-const mapStateToProps = (state) => {
-    const { mainContentReducer } = state
+const mapStateToProps = (state) => {return {}}
+const mapDispatchToProps = (dispatch) => {
     return {
-        signUp: mainContentReducer.SignUp,
-
+        onLogInButton: () => { dispatch(clickSignUpButtonCreator()) }
     }
 }
 
-function mapDispatchToProps(dispatch){
-    return{
-      onLogInButton: ()=>{dispatch(clickSignUpButtonCreator())}
-    }
-  }
-  
-  export default connect(mapStateToProps, mapDispatchToProps)(SignUp)
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp)

@@ -1,30 +1,27 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { clickSignUpCreator, clickLogInCreator, clickLogoCreator, clickLogOutCreator, clickHistoryCreator, clickFavoritesCreator, pressEnterCreator } from './redux/actions';
+import { clickSignUpCreator, clickLogInCreator, clickLogoCreator, clickLogOutCreator, clickHistoryCreator, clickFavoritesCreator } from './redux/actions';
 
-
-
-
-function Header(props) {
+const Header = ({ SignUpButton, LogInButton, HistoryButton, FavoritesButton, LogOutButton, onFavoritesButtonPress, onHistoryButtonPress, onLogInButtonPress, onSignUpButtonPress, onLogoButtonPress, onEnterPress, onLogOutButtonPress }) => {
+  
   return (
     <div className='header'>
-      <h1 className='header__logo' onClick={props.onLogo} >Weather <br></br> Forecast</h1>
-      <input placeholder='Enter city' className='header__input' onKeyPress={props.pressEnter} ></input>
+      <h1 className='header__logo' onClick={onLogoButtonPress} >Weather <br></br> Forecast</h1>
+      <input className='header__input' placeholder='Enter city' onKeyPress={onEnterPress} ></input>
       {
-        props.SignUpButton && props.LogInButton
+        SignUpButton && LogInButton
           ? <div>
-            <span className='header__signUp header__buttoms' onClick={props.onSignUp} >Sign Up</span>
-            <span className='header__logIn header__buttoms' onClick={props.onLogIn} > Log In</span>
+            <span className='header__signUp header__buttoms' onClick={onSignUpButtonPress} >Sign Up</span>
+            <span className='header__logIn header__buttoms' onClick={onLogInButtonPress} > Log In</span>
           </div>
           : null
       }
-
       {
-        props.HistoryButton && props.FavoritesButton && props.LogOutButton
+        HistoryButton && FavoritesButton && LogOutButton
           ? <div>
-            <span className='header__history header__buttoms' onClick={props.onHistory}>History</span>
-            <span className='header__favorites header__buttoms' onClick={props.onFavorites}> Favorites</span>
-            <span className='header__logOut header__buttoms' onClick={props.onLogOut} > Log Out</span>
+            <span className='header__history header__buttoms' onClick={onHistoryButtonPress}>History</span>
+            <span className='header__favorites header__buttoms' onClick={onFavoritesButtonPress}> Favorites</span>
+            <span className='header__logOut header__buttoms' onClick={onLogOutButtonPress} > Log Out</span>
           </div>
           : null
       }
@@ -42,14 +39,14 @@ const mapStateToProps = (state) => {
     LogOutButton: headerReducer.LogOutButton
   }
 }
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onSignUp: () => { dispatch(clickSignUpCreator()) },
-    onLogIn: () => { dispatch(clickLogInCreator()) },
-    onLogo: () => { dispatch(clickLogoCreator()) },
-    onLogOut: () => { dispatch(clickLogOutCreator()); dispatch(clickLogoCreator()) },
-    onFavorites: () => { dispatch(clickFavoritesCreator()) },
-    onHistory: () => { dispatch(clickHistoryCreator()) }
+    onSignUpButtonPress: () => { dispatch(clickSignUpCreator()) },
+    onLogInButtonPress: () => { dispatch(clickLogInCreator()) },
+    onLogoButtonPress: () => { dispatch(clickLogoCreator()) },
+    onLogOutButtonPress: () => { dispatch(clickLogOutCreator()); dispatch(clickLogoCreator()) },
+    onFavoritesButtonPress: () => { dispatch(clickFavoritesCreator()) },
+    onHistoryButtonPress: () => { dispatch(clickHistoryCreator()) }
   }
 }
 

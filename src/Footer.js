@@ -1,13 +1,17 @@
 import React from 'react';
+import { FooterContext } from './App';
 
 
 
-
-function Footer(props) {
+const Footer = () => {
   return (
-    <div className="footer"> <a href='https://t.me/vanyachyzh'>      vanyachyzh</a>  </div>
-  )
+    <FooterContext.Consumer>
+      {name => <div className="footer">
+        <a href='https://t.me/vanyachyzh'>{name}</a>
+      </div>}
+    </FooterContext.Consumer>)
 }
 
+export default Footer;
 
-export default Footer
+
